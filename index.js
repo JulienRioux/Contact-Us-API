@@ -5,7 +5,7 @@ const express = require("express"),
 
 const cors = require('cors');
 
-app.options('*', cors())
+app.use(cors());
 
 // Setting up the bodyParser
 // parse application/x-www-form-urlencoded
