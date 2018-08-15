@@ -19,4 +19,8 @@ app.get("/", (req, res) => {
 	})
 })
 
+app.post("/email/new", (req, res) => {
+	res.send("Thanks for your email!");
+})
+
 app.listen(PORT, console.log(`Server Running on port ${ PORT }`))
