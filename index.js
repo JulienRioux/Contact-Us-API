@@ -1,0 +1,18 @@
+const express = require("express"),
+      bodyParser = require("body-parser"),
+			PORT = process.env.PORT || 3000,
+			app = express();
+
+// Setting up the bodyParser
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json());
+
+app.get("/", (req, res) => {
+	res.send({
+		text: "Hello World!"
+	})
+})
+
+app.listen(PORT, console.log(`Server Running on port ${ PORT }`))
