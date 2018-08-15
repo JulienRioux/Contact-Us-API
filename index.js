@@ -1,7 +1,11 @@
 const express = require("express"),
       bodyParser = require("body-parser"),
-			PORT = process.env.PORT || 3000,
+			PORT = process.env.PORT || 3001,
 			app = express();
+
+const cors = require('cors');
+
+app.options('*', cors())
 
 // Setting up the bodyParser
 // parse application/x-www-form-urlencoded
