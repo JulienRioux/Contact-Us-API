@@ -20,7 +20,9 @@ app.get("/", (req, res) => {
 })
 
 app.post("/email/new", (req, res) => {
-	res.send("Thanks for your email!");
+	res.send({
+		text: "Api running!"
+	})
 })
 
 app.listen(PORT, console.log(`Server Running on port ${ PORT }`))
