@@ -10,21 +10,9 @@ const express = require("express"),
 const cors = require('cors');
 app.use(cors());
 
-// Setting up sendgrid
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// Function that send the email
-const sendEmail = (email) => {
-	const msg = {
-	  to: email,
-	  from: 'newEmail@koidja.com',
-	  subject: 'Let\'s build it',
-	  text: `Email: ${ email }`,
-	  html: `<strong>Email:</strong> ${ email }`,
-	};
-	sgMail.send(msg);
-}
+// inporting the function that send email
+const { sendEmailToClient, sendContactUsForm } = require("./helpers/sendEmail");
 
 // Setting up the bodyParser
 // parse application/x-www-form-urlencoded
@@ -32,9 +20,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json());
 
+// Post new email route
 app.post("/email/new", (req, res) => {
-	sendEmail(req.body.email)
+	sendEmailToClient(req.body.user)
+	sendContactUsForm(req.body.user)
 	res.send("Successfully sent");
+
+	// Return the message instead of sending it
+	// res.send({
+	// 	toClient: sendEmailToClient(req.body.user),
+	// 	toCompany: sendContactUsForm(req.body.user)
+	// });
 })
 
 app.listen(PORT, console.log(`Server Running on port ${ PORT }`))
